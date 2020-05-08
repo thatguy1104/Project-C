@@ -7,7 +7,6 @@
 #define L 20
 #define N 5
 
-
 char mat[ITERATIONS][5];
 char mat2[ITERATIONS][5];
 int decmat4[100], oke = 1, happy = 0;
