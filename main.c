@@ -7,6 +7,7 @@
 #define L 20
 #define N 5
 
+
 char mat[ITERATIONS][5];
 char mat2[ITERATIONS][5];
 int decmat4[100], oke = 1, happy = 0;
@@ -90,7 +91,7 @@ void asknumHex(char numHex[MAXCHAR]) {
             i++;
         }
     } while (character != 13 && i < MAXCHAR);//if value is not in hexadecimal, it will not read it.
-}//ok
+}
 
 int removezeroes(char numHex[MAXCHAR], char nozerosHex[MAXCHAR]) {
     int i;
@@ -164,8 +165,7 @@ int happyNumber(char nozerosHex[MAXCHAR], char matrix[ITERATIONS][5]) {//will ch
     return count;
 }//ok
 
-int conversionDec2Hex(int sol, int count,
-                      char matrix2[5]) {//converts sum of digits in hexadecimals for printing. //funcion ---> int nombre
+int conversionDec2Hex(int sol, int count, char matrix2[5]) {//converts sum of digits in hexadecimals for printing. //funcion ---> int nombre
     int j = 4, i, k = 0, remainder = 0, quotient = 0, temp;
     quotient = sol;//gives the int quotient the value of sol.
     for (i = 0; i < 5; i++) {
@@ -182,7 +182,7 @@ int conversionDec2Hex(int sol, int count,
         quotient = quotient / 16;
     }
     printf("\nIteration %d is %s", count, matrix2);//ok
-}//ok
+}
 
 int squaresum1(char nozerosHex[MAXCHAR], int end, int count) { // It receives int and returns the adding of the squares of its figures.
     int start = 0;
