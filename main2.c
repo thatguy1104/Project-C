@@ -18,38 +18,34 @@ void questions() {
 }
 
 bool check(char *hex) {
-    int numOfZeros = 0;
-    for (int i = 0; i < strlen(hex); i++) {
-        if (hex[i] == '0') {
-            numOfZeros++;
+    int allZeros = false;
+    for (int i = 0; i < strlen(hex) - 1; i++) {
+        if ((hex[i] != '0')) {
+            allZeros = false;
+        } else {
+            allZeros = true;
         }
     }
-    return numOfZeros > 2;
+    return allZeros;
 }
 
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     bool zeros = true;
-    
     fflush(stdin);
-    printf("Enter a hexadecimal number\n");
-    scanf("%[1-9A-Z]", hex);
 
-    // Loop to get correct input. Loops if more than 2 zeros's are entered
     while (zeros) {
-        fflush(stdin);
         printf("Enter a hexadecimal number\n");
         scanf("%[1-9A-Z]", hex);
-        if(check(hex)) {
+        if (check(hex)) {
             continue;
         } else {
             zeros = false;
-            break;
         }
     }
+
     char *str = hex;
     printString(hex); // For debugging purposes. May remove this after.
-
     return str;
 }
 
