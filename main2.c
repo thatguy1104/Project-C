@@ -27,17 +27,31 @@ char *askForHexadecimal() {
 }
 
 void printString(char *str) {
-    while(*str!='\0')
-        printf("%c",*str++);
+    while (*str != '\0')
+        printf("%c", *str++);
     printf("\n");
 }
 
 int HexToDec(char *hex) {
+    int len = strlen(hex);
+    int base = 1;
+    int dec_val = 0;
 
-    return 0;
+    for (int i = len - 1; i >= 0; i--) {
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            dec_val += (hex[i] - 48) * base;
+            base *= 16;
+        }
+        else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            dec_val += (hex[i] - 55) * base;
+            base *= 16;
+        }
+    }
+    printf("%i\n", dec_val);
+    return dec_val;
 }
 
-char* DecToHex(int decimal) {
+char *DecToHex(int decimal) {
     char hexadecimal[100];
     char final[100];
     char *str = final;
@@ -57,10 +71,10 @@ char* DecToHex(int decimal) {
         }
         decimal = decimal / 16;
     }
-    hexadecimal[i]='\0';
+    hexadecimal[i] = '\0';
 
     // Reverse hexadecimal array to get the final result
-    for(int j = i - 1; j >= 0; j--) {
+    for (int j = i - 1; j >= 0; j--) {
         final[k] = hexadecimal[j];
         k++;
     }
@@ -72,7 +86,8 @@ void run() {
 //    questions();
 //    char *hexadecimal = askForHexadecimal();
 //    printString(hexadecimal);
-    DecToHex(2545);
+//    DecToHex(2545);
+    HexToDec("1A");
 }
 
 int main() {
