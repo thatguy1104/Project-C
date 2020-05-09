@@ -6,6 +6,8 @@
 
 void questions();
 
+void printString(char* str);
+
 void asknumHex(char numHex[MAXCHAR]);
 
 int removezeroes(char numHex[MAXCHAR], char nozerosHex[MAXCHAR]);
