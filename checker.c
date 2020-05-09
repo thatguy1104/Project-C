@@ -9,10 +9,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 #define HEX_LEN 20
 
 void printString(char *str) {
-    while (*str != '\0')
+    while (*str != '\n')
         printf("%c", *str++);
     printf("\n");
 }
@@ -22,23 +23,52 @@ char *capitalise(char *hex) {
     for (int i = 0; i < strlen(hex) + 1; i++) {
         result[i] = toupper(hex[i]);
     }
-    printString(result);
     char *str = result;
     return str;
+}
+
+char *removeZeros(char *str) {
+    char nonZ[HEX_LEN];
+    int k = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] != '0') {
+            nonZ[k] = str[i];
+            k++;
+        }
+    }
+    char *p = nonZ;
+    return p;
+}
+
+bool allZeros(char *str) {
+    bool zeros = false;
+    while (*str != '\n') {
+        if (*str != '0') {
+            return false;
+        }
+        str++;
+    }
+    return true;
 }
 
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     bool zeros = true;
-    fflush(stdin);
 
-    printf("Enter a hexadecimal number\n");
-    scanf("%s", hex);
+    printf("Enter a hexadecimal number:\n");
+    fgets(hex, HEX_LEN, stdin);
 
-    char *str = capitalise(hex);
+    while (allZeros(hex)) {
+        printf("Enter a hexadecimal number:\n");
+        fgets(hex, HEX_LEN, stdin);
+    }
+
+    char *str = hex;
+    printString(hex);
     return str;
 }
 
 int main() {
     char *hexadecimal = askForHexadecimal();
+//    allZeros("0000q");
 }

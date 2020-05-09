@@ -9,6 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 #define HEX_LEN 20
 
 void questions() {
@@ -64,8 +65,7 @@ int HexToDec(char *hex) {
         if (hex[i] >= '0' && hex[i] <= '9') {
             dec_val += (hex[i] - 48) * base;
             base *= 16;
-        }
-        else if (hex[i] >= 'A' && hex[i] <= 'F') {
+        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
             dec_val += (hex[i] - 55) * base;
             base *= 16;
         }
@@ -74,11 +74,11 @@ int HexToDec(char *hex) {
     return dec_val;
 }
 
-int int_len(int value){
+int int_len(int value) {
     int l = !value;
     while (value) {
         l++;
-        value/=10;
+        value /= 10;
     }
     return l;
 }
@@ -115,25 +115,24 @@ char *DecToHex(int decimal) {
 }
 
 int squaresum1(char *hex) {
-    int sum = 0;
-    int dec = HexToDec(hex);
-
-    for (int i = 0; i < int_len(dec); i++) {
-        while (dec > 0) {
-            dec = dec / 10;
-            sum += pow(dec, 2);
-        }
+    int Dec2sum = HexToDec(hex);
+    int remainder = 0, sum = 0;
+    while (Dec2sum > 0) {
+        remainder = Dec2sum % 10;
+        sum += remainder * remainder;
+        Dec2sum = Dec2sum / 10;
     }
+    printf("the sum of %s is %d \n", hex, sum);
     return sum;
 }
 
 void run() {
-    questions();
-    char *hexadecimal = askForHexadecimal();
+//    questions();
+//    char *hexadecimal = askForHexadecimal();
 //    printString(hexadecimal);
-//    DecToHex(2545);
+//    DecToHex(10);
 //    HexToDec("1A");
-
+    squaresum1("AB");
 }
 
 int main() {
