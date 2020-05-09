@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <stdbool.h>
 #define HEX_LEN 20
 
 void questions() {
@@ -17,12 +17,39 @@ void questions() {
     fgets(continueKey, 2, stdin);
 }
 
+bool check(char *hex) {
+    int numOfZeros = 0;
+    for (int i = 0; i < strlen(hex); i++) {
+        if (hex[i] == '0') {
+            numOfZeros++;
+        }
+    }
+    return numOfZeros > 2;
+}
+
 char *askForHexadecimal() {
     char hex[HEX_LEN];
+    bool zeros = true;
+    
     fflush(stdin);
     printf("Enter a hexadecimal number\n");
-    fgets(hex, HEX_LEN, stdin);
+    scanf("%[1-9A-Z]", hex);
+
+    // Loop to get correct input. Loops if more than 2 zeros's are entered
+    while (zeros) {
+        fflush(stdin);
+        printf("Enter a hexadecimal number\n");
+        scanf("%[1-9A-Z]", hex);
+        if(check(hex)) {
+            continue;
+        } else {
+            zeros = false;
+            break;
+        }
+    }
     char *str = hex;
+    printString(hex); // For debugging purposes. May remove this after.
+
     return str;
 }
 
@@ -49,6 +76,15 @@ int HexToDec(char *hex) {
     }
     printf("%i\n", dec_val);
     return dec_val;
+}
+
+int int_len(int value){
+    int l = !value;
+    while (value) {
+        l++;
+        value/=10;
+    }
+    return l;
 }
 
 char *DecToHex(int decimal) {
@@ -82,12 +118,26 @@ char *DecToHex(int decimal) {
     return str;
 }
 
+int squaresum1(char *hex) {
+    int sum = 0;
+    int dec = HexToDec(hex);
+
+    for (int i = 0; i < int_len(dec); i++) {
+        while (dec > 0) {
+            dec = dec / 10;
+            sum += pow(dec, 2);
+        }
+    }
+    return sum;
+}
+
 void run() {
-//    questions();
-//    char *hexadecimal = askForHexadecimal();
+    questions();
+    char *hexadecimal = askForHexadecimal();
 //    printString(hexadecimal);
 //    DecToHex(2545);
-    HexToDec("1A");
+//    HexToDec("1A");
+
 }
 
 int main() {

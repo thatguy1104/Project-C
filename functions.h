@@ -18,8 +18,6 @@ int happyNumber(char nozerosHex[MAXCHAR],char matrix[ITERATIONS][5]);
 
 int conversionDec2Hex(int sol, int count, char matrix2[5]);
 
-int squaresum1 (char nozerosHex[MAXCHAR],int end, int count);
-
 void fmatrix(char matrix[ITERATIONS][5], int count);
 
 void count_frequency(int*data,int size);
