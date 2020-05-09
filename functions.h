@@ -20,9 +20,11 @@ bool check(char *hex);
 
 char *capitalise(char *hex);
 
+bool allZeros(char *str);
+
 void asknumHex(char numHex[MAXCHAR]);
 
-int removezeroes(char numHex[MAXCHAR], char nozerosHex[MAXCHAR]);
+char *removeZeros(char *str);
 
 int conversionHex2Dec(char numHex[MAXCHAR]);
 

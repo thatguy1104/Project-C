@@ -9,12 +9,31 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
-
 #define HEX_LEN 20
+
+// Supplementary Functions
+
+int int_len(int value) {
+    int l = !value;
+    while (value) {
+        l++;
+        value /= 10;
+    }
+    return l;
+}
+
+void printString(char *str) {
+    while (*str != '\n')
+        printf("%c", *str++);
+    printf("\n");
+}
+
+
+// Main Program Functions
 
 void questions() {
     char continueKey[2];
-    printf("\nWelcome, press any key to start\n");
+    printf("Welcome, press any key to start\n");
     fgets(continueKey, 2, stdin);
 }
 
@@ -33,27 +52,51 @@ bool check(char *hex) {
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     bool zeros = true;
-    fflush(stdin);
 
-    while (zeros) {
-        printf("Enter a hexadecimal number\n");
-        scanf("%[1-9A-Z]", hex);
-        if (check(hex)) {
-            continue;
-        } else {
-            zeros = false;
-        }
+    printf("Enter a hexadecimal number:\n");
+    fgets(hex, HEX_LEN, stdin);
+
+    while (allZeros(hex)) {
+        printf("Enter a hexadecimal number:\n");
+        fgets(hex, HEX_LEN, stdin);
     }
 
     char *str = hex;
-    printString(hex); // For debugging purposes. May remove this after.
+    printString(hex);
     return str;
 }
 
-void printString(char *str) {
-    while (*str != '\0')
-        printf("%c", *str++);
-    printf("\n");
+char *capitalise(char *hex) {
+    char result[HEX_LEN];
+    for (int i = 0; i < strlen(hex) + 1; i++) {
+        result[i] = toupper(hex[i]);
+    }
+    char *str = result;
+    return str;
+}
+
+char *removeZeros(char *str) {
+    char nonZ[HEX_LEN];
+    int k = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] != '0') {
+            nonZ[k] = str[i];
+            k++;
+        }
+    }
+    char *p = nonZ;
+    return p;
+}
+
+bool allZeros(char *str) {
+    bool zeros = false;
+    while (*str != '\n') {
+        if (*str != '0') {
+            return false;
+        }
+        str++;
+    }
+    return true;
 }
 
 int HexToDec(char *hex) {
@@ -72,15 +115,6 @@ int HexToDec(char *hex) {
     }
     printf("%i\n", dec_val);
     return dec_val;
-}
-
-int int_len(int value) {
-    int l = !value;
-    while (value) {
-        l++;
-        value /= 10;
-    }
-    return l;
 }
 
 char *DecToHex(int decimal) {
@@ -126,13 +160,14 @@ int squaresum1(char *hex) {
     return sum;
 }
 
+void iterationLoop(char *hex) {
+
+}
+
 void run() {
-//    questions();
-//    char *hexadecimal = askForHexadecimal();
-//    printString(hexadecimal);
-//    DecToHex(10);
-//    HexToDec("1A");
-    squaresum1("AB");
+    questions();
+    char *hexadecimal = askForHexadecimal();
+    iterationLoop(hexadecimal);
 }
 
 int main() {
