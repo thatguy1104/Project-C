@@ -3,11 +3,13 @@
 //
 
 #include "functions.h"
-#include<math.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
-#include<ctype.h>
+#include <string.h>
+#include <ctype.h>
+
+#define HEX_LEN 20
 
 void questions() {
     char continueKey[2];
@@ -15,26 +17,62 @@ void questions() {
     fgets(continueKey, 2, stdin);
 }
 
-char* askForHexadecimal() {
-    char hex[20];
+char *askForHexadecimal() {
+    char hex[HEX_LEN];
     fflush(stdin);
     printf("Enter a hexadecimal number\n");
-    fgets(hex, 20, stdin);
+    fgets(hex, HEX_LEN, stdin);
     char *str = hex;
     return str;
 }
 
-void printString(char* str) {
-    for (int i = 0; i < strlen(str); i++) {
-        printf("%c", str[i]);
+void printString(char *str) {
+    while(*str!='\0')
+        printf("%c",*str++);
+    printf("\n");
+}
+
+int HexToDec(char *hex) {
+
+    return 0;
+}
+
+char* DecToHex(int decimal) {
+    char hexadecimal[100];
+    char final[100];
+    char *str = final;
+    int i = 0, k = 0;
+
+    while (decimal != 0) {
+        int temp = 0;
+
+        temp = decimal % 16;
+
+        if (temp < 10) {
+            hexadecimal[i] = (char) (temp + 48);
+            i++;
+        } else {
+            hexadecimal[i] = (char) (temp + 55);
+            i++;
+        }
+        decimal = decimal / 16;
     }
+    hexadecimal[i]='\0';
+
+    // Reverse hexadecimal array to get the final result
+    for(int j = i - 1; j >= 0; j--) {
+        final[k] = hexadecimal[j];
+        k++;
+    }
+    printString(final);
+    return str;
 }
 
 void run() {
-    questions();
-    char *hexadecimal = askForHexadecimal();
-    printString(hexadecimal);
-
+//    questions();
+//    char *hexadecimal = askForHexadecimal();
+//    printString(hexadecimal);
+    DecToHex(2545);
 }
 
 int main() {
