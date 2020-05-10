@@ -9,6 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 #define HEX_LEN 20
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
@@ -169,7 +170,7 @@ char *DecToHex(int decimal) {
         final[k] = hexadecimal[j];
         k++;
     }
-    final[k+1] = '\0';
+    final[k + 1] = '\0';
 
     // For dynamic allocation of memory, copy contents of the final array to the heap
     for (int i = 0; i < strlen(final); i++) {
@@ -210,15 +211,12 @@ void iterationLoop(char *hex) {
 
             printString(hex);
             iteration++;
-        }
-        else if (continue_key[0] == ' ') {
+        } else if (continue_key[0] == ' ') {
             break;
-        }
-        else if (sum_of_squares == 1) {
+        } else if (sum_of_squares == 1) {
             strcpy(matrix[iteration], "1");
             break;
-        }
-        else {
+        } else {
             break;
         }
     }
@@ -232,6 +230,7 @@ void run() {
     questions();
     char *hexadecimal = askForHexadecimal();
     iterationLoop(hexadecimal);
+
 }
 
 int main() {

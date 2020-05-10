@@ -1,0 +1,90 @@
+//
+// Created by Albert Mukhametov on 10/05/2020.
+//
+
+#include "functions.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+#define HEX_LEN 20
+#define MAX_ITERATIONS 100
+#define STR_LEN 5
+
+//void repeatedStrings(char matrix[MAX][5], int numiterations) {//brings the matrix and the number of iterations
+//    char rep[ITERATIONS][100]; //new matrix for repeated strings.
+//    int i = 0, j = 0, t, repetitions, h, y, numrep = 0;
+//    for (i = 1; i <= numiterations; i++) {
+//        t = 0;
+//        for (j = 1; j <= numiterations; j++) {
+//            if (strcmp(matrix[i], rep[j]) == 0) {
+//                t = 1;
+//            }
+//        }
+//        if (t != 1) {
+//            numrep = numrep + 1;
+//            strcpy(rep[numrep], matrix[i]);
+//        }
+//    }
+//    for (i = 1; i <= numrep; i++) {
+//        t = 0;
+//        for (j = 1; j <= numiterations; j++) {
+//            if (strcmp(rep[i], matrix[j]) == 0) {
+//                t = t + 1;
+//            }
+//        }
+//        if (t > 1) {
+//            printf("\n %s is repeated %d times", rep[i], t);
+//            h = 1;
+//        }
+//    }
+//    if (h == 1) {
+//        printf("\n Unhappy number because the strings are repeated.");
+//        y = 0; //this variable used ony to then show if repetitions or not
+//    } else {
+//        printf("\nThere are no repeated strings, so no conclusions taken");
+//        y = -1; //this variable used ony to then show if repetitions or not
+//    }
+//    memset(rep, 0, sizeof rep);//this clears the matrix so it doesn't fuck up later on.
+//}
+
+void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    char repetitions[MAX_ITERATIONS][STR_LEN];
+    int num_of_reps[MAX_ITERATIONS];
+    int reps = 0;
+    int n = 0;
+
+    printf("Repeating elements are\n");
+    for (int i = 0; i < iterations; i++) {
+        for (int j = i + 1; j < STR_LEN; j++) {
+            if (strcmp(matrix[i], matrix[j]) == 0) {
+//                for (int k = 0; k < iterations; k++) {
+//                    for (int m = k + 1; m < STR_LEN; m++) {
+//                        if (strcmp(repetitions[k], matrix[m]) == 0) {
+//                            num_of_reps[n] += 1;
+//                        }
+//                    }
+//                }
+
+                printf("%s repeated %i times\n", matrix[i], num_of_reps[n]);
+                strcpy(repetitions[n], matrix[i]);
+                n++;
+            }
+        }
+    }
+}
+
+int main() {
+    char matrix[MAX_ITERATIONS][STR_LEN] = {
+            {"001A"},
+            {"001B"},
+            {"001C"},
+            {"001A"},
+            {"001B"},
+            {"001B"}
+    };
+    repeatedStrings(matrix, 5);
+}
