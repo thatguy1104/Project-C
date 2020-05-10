@@ -11,6 +11,8 @@
 #include <stdbool.h>
 
 #define HEX_LEN 20
+#define MAX_ITERATIONS 100
+#define STR_LEN 5
 
 void printString(char *str) {
     while (*str != '\0')
@@ -81,25 +83,32 @@ int squaresum1(char *hex) {
     return sum;
 }
 
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN]) {
+    printf("\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%s\n", matrix[i]);
+    }
+}
+
 void iterationLoop(char *hex) {
-    int iteration = 0, max_iterations = 20;
+    int iteration = 0;
     char continue_key[2];
     int sum_of_squares = squaresum1(hex);
     bool start = true;
     printf("Starting...\n");
     fgets(continue_key, 1, stdin);
 
-    char matrix[100][5];
+    char matrix[MAX_ITERATIONS][STR_LEN];
 
     while (start) {
-        if (iteration != max_iterations && sum_of_squares != 1) {
+        if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
             fgets(continue_key, 2, stdin);
             printString(hex);
             strcpy(matrix[iteration], hex);
             printf("in decimal = %i\n", HexToDec(hex));
             printf("sum of squares = %i\n", squaresum1(hex));
-            int square = squaresum1(hex);
-            hex = DecToHex(square);
+            sum_of_squares = squaresum1(hex);
+            hex = DecToHex(sum_of_squares);
 
             printString(hex);
             iteration++;
@@ -107,11 +116,16 @@ void iterationLoop(char *hex) {
         else if (continue_key[0] == ' ') {
             break;
         }
+        else if (sum_of_squares == 1) {
+            strcpy(matrix[iteration], "1");
+            break;
+        }
         else {
             start = false;
             break;
         }
     }
+    printMatrix(matrix);
 }
 
 int main() {
