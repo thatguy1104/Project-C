@@ -203,6 +203,9 @@ void iterationLoop(char *hex) {
             break;
         }
     }
+    char key[2];
+    printf("\nPress any key to show the iterations matrix:\n");
+    fgets(key, 2, stdin);
     printMatrix(matrix, iteration);
 }
 
