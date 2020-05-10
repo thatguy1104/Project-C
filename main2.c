@@ -28,6 +28,12 @@ void printString(char *str) {
     printf("\n");
 }
 
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN]) {
+    printf("\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%s\n", matrix[i]);
+    }
+}
 
 // Main Program Functions
 
@@ -161,7 +167,41 @@ int squaresum1(char *hex) {
 }
 
 void iterationLoop(char *hex) {
+    int iteration = 0;
+    char continue_key[2];
+    int sum_of_squares = squaresum1(hex);
+    bool start = true;
+    printf("Starting...\n");
+    fgets(continue_key, 1, stdin);
 
+    char matrix[MAX_ITERATIONS][STR_LEN];
+
+    while (start) {
+        if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
+            fgets(continue_key, 2, stdin);
+            printString(hex);
+            strcpy(matrix[iteration], hex);
+            printf("in decimal = %i\n", HexToDec(hex));
+            printf("sum of squares = %i\n", squaresum1(hex));
+            sum_of_squares = squaresum1(hex);
+            hex = DecToHex(sum_of_squares);
+
+            printString(hex);
+            iteration++;
+        }
+        else if (continue_key[0] == ' ') {
+            break;
+        }
+        else if (sum_of_squares == 1) {
+            strcpy(matrix[iteration], "1");
+            break;
+        }
+        else {
+            start = false;
+            break;
+        }
+    }
+    printMatrix(matrix);
 }
 
 void run() {
