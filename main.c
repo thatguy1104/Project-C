@@ -223,7 +223,7 @@ void iterationLoop(char *hex) {
         }
     }
     char key[2];
-    printf("\nPress any key to show the iterations matrix:\n");
+    printf("\nPress any key to show the iterations matrix:");
     fgets(key, 2, stdin);
     printMatrix(matrix, iteration);
 }
