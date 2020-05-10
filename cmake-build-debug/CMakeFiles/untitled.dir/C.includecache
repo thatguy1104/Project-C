@@ -7,6 +7,18 @@
 #IncludeRegexTransform: 
 
 /Users/albert.ov11/Desktop/C_Project/functions.h
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+ctype.h
+-
+stdbool.h
+-
 
 /Users/albert.ov11/Desktop/C_Project/main.c
 functions.h
@@ -15,8 +27,12 @@ math.h
 -
 stdio.h
 -
+stdlib.h
+-
 string.h
 -
 ctype.h
+-
+stdbool.h
 -
 
