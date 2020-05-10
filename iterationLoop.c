@@ -36,16 +36,15 @@ int HexToDec(char *hex) {
 }
 
 char *DecToHex(int decimal) {
-    char hexadecimal[100];
-    char final[100];
-    char *str = final;
+    char hexadecimal[5];
+    char final[5];
+    // Dynamically allocate memory for the final string - it will be used to update it each iteration
+    char *str = malloc(5);
     int i = 0, k = 0;
 
     while (decimal != 0) {
         int temp = 0;
-
         temp = decimal % 16;
-
         if (temp < 10) {
             hexadecimal[i] = (char) (temp + 48);
             i++;
@@ -62,7 +61,12 @@ char *DecToHex(int decimal) {
         final[k] = hexadecimal[j];
         k++;
     }
-    final[k] = '\0';
+    final[k+1] = '\0';
+
+    // For dynamic allocation of memory, copy contents of the final array to the heap
+    for (int i = 0; i < strlen(final); i++) {
+        str[i] = final[i];
+    }
     return str;
 }
 
@@ -78,38 +82,38 @@ int squaresum1(char *hex) {
 }
 
 void iterationLoop(char *hex) {
-    int iteration = 1, max_iterations = 100;
+    int iteration = 0, max_iterations = 20;
     char continue_key[2];
     int sum_of_squares = squaresum1(hex);
     bool start = true;
     printf("Starting...\n");
     fgets(continue_key, 1, stdin);
 
+    char matrix[100][5];
+
     while (start) {
         if (iteration != max_iterations && sum_of_squares != 1) {
             fgets(continue_key, 2, stdin);
-            printf("%s\n", hex);
+            printString(hex);
+            strcpy(matrix[iteration], hex);
             printf("in decimal = %i\n", HexToDec(hex));
             printf("sum of squares = %i\n", squaresum1(hex));
-            hex = DecToHex(squaresum1(hex));
+            int square = squaresum1(hex);
+            hex = DecToHex(square);
+
+            printString(hex);
             iteration++;
-        } else {
+        }
+        else if (continue_key[0] == ' ') {
+            break;
+        }
+        else {
             start = false;
             break;
         }
     }
-
-
-//    while ((iteration != max_iterations) && (sum_of_squares != 1) && (continue_key[0] == ' ')) {
-//        fgets(continue_key, 1, stdin);
-//        printf("%s\n", hex);
-//        printf("in decimal = %i\n", HexToDec(hex));
-//        printf("sum of squares = %i\n", squaresum1(hex));
-//        hex = DecToHex(squaresum1(hex));
-//        iteration++;
-//    }
 }
 
 int main() {
-    iterationLoop("1A");
+    iterationLoop("31");
 }
