@@ -59,6 +59,8 @@ bool check(char *hex) {
 
 char *askForHexadecimal() {
     char hex[HEX_LEN];
+    char cap[HEX_LEN];
+    char noZeros[HEX_LEN];
     char *str = malloc(HEX_LEN);
 
     printf("Enter a hexadecimal number:\n");
@@ -71,28 +73,45 @@ char *askForHexadecimal() {
     for (int i = 0; i < strlen(hex) - 1; i++) {
         str[i] = hex[i];
     }
-    return str;
+
+    char *f = removeZeros(str);
+    char *c = capitalise(f);
+    printString(c);
+    return c;
 }
 
 char *capitalise(char *hex) {
     char result[HEX_LEN];
-    for (int i = 0; i < strlen(hex) + 1; i++) {
+    for (int i = 0; i < strlen(hex); i++) {
         result[i] = toupper(hex[i]);
     }
-    char *str = result;
+
+    char *str = malloc(HEX_LEN);
+    for (int i = 0; i < strlen(result); i++) {
+        str[i] = result[i];
+    }
     return str;
 }
 
 char *removeZeros(char *str) {
     char nonZ[HEX_LEN];
     int k = 0;
+    bool leading = true;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] != '0') {
             nonZ[k] = str[i];
             k++;
+            leading = false;
+        }
+        if (str[i] == '0' && !leading) {
+            nonZ[k] = str[i];
+            k++;
         }
     }
-    char *p = nonZ;
+    char *p = malloc(HEX_LEN);
+    for (int i = 0; i < strlen(nonZ); i++) {
+        p[i] = nonZ[i];
+    }
     return p;
 }
 

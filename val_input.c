@@ -88,8 +88,8 @@ char *askForHexadecimal() {
 }
 
 int main() {
-//    char *hexadecimal = askForHexadecimal();
-    char *f = removeZeros("0001aacs000");
+    char *hexadecimal = askForHexadecimal();
+    char *f = removeZeros(hexadecimal);
     char *c = capitalise(f);
     printString(c);
 }
