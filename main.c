@@ -205,12 +205,11 @@ void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeats[MAX_ITERATIONS][
     for (int i = 0; i < reps; i++) {
         printf("%s is repeated %i times\n", repeats[i], search(matrix, repeats[i], reps));
     }
+    printf("\n");
 }
 
 void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS][STR_LEN];
-    int num_of_reps[MAX_ITERATIONS];
-    int reps = 0, count;
     int n = 0;
 
     printf("Repeating elements are\n");
@@ -277,7 +276,6 @@ void run() {
     questions();
     char *hexadecimal = askForHexadecimal();
     iterationLoop(hexadecimal);
-
 }
 
 int main() {
