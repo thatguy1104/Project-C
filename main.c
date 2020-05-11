@@ -222,16 +222,15 @@ void iterationLoop(char *hex) {
     char matrix[MAX_ITERATIONS][STR_LEN];
 
     while (true) {
-        if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
+        if (iteration != MAX_ITERATIONS && sum_of_squares != 1 && continue_key[0] != ' ') {
             fgets(continue_key, 2, stdin);
             sum_of_squares = squaresum1(hex);
             hex = DecToHex(sum_of_squares);
             strcpy(matrix[iteration], hex);
             printf("Iteration %i: %s", iteration + 1, hex);
             iteration++;
-        } else if (continue_key[0] == ' ') {
-            break;
-        } else if (sum_of_squares == 1) {
+        }
+        else if (sum_of_squares == 1) {
             strcpy(matrix[iteration], "0001");
             break;
         } else {
@@ -240,7 +239,7 @@ void iterationLoop(char *hex) {
     }
     char key[2];
     printf("\n\nPress any key to show the iterations matrix:");
-    printf("\n--------------------------------------------");
+    printf("\n--------------------------------------------\n");
     fgets(key, 2, stdin);
     printMatrix(matrix, iteration);
     printf("\nPress any key to show the repetitions:");
