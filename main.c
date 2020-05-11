@@ -91,6 +91,7 @@ int HexToDec(char *hex) {
 char *DecToHex(int decimal) {
     char hexadecimal[5];
     char final[5];
+
     // Dynamically allocate memory for the final string - it will be used to update it each iteration
     char *str = malloc(5);
     int i = 0, k = 0;
@@ -112,7 +113,6 @@ char *DecToHex(int decimal) {
         final[k] = hexadecimal[j];
         k++;
     }
-
     // For dynamic allocation of memory, copy contents of the final array to the heap
     for (int i = 0; i < strlen(final); i++) {
         str[i] = final[i];
@@ -163,6 +163,32 @@ char *askForHexadecimal() {
     printf("String is: %s", c);
     return c;
 }
+
+void charReps(char string[STR_LEN]) {
+    int freq[256] = {0};
+    for (int i = 0; string[i] != '\0'; i++) {
+        freq[string[i]]++;
+    }
+    printf("%lu symbols, %i leading on the left", strlen(string), 0);
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] != 0) {
+            printf("%d symbols %c\n", freq[i], i);
+        }
+    }
+}
+void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    char repetitions[MAX_ITERATIONS];
+    int n = 0;
+    char *new_str;
+    if ((new_str = malloc((STR_LEN * iterations) + 1)) != NULL) {
+        new_str[0] = '\0';   // ensures the memory is an empty string
+        for (int i = 0; i < iterations; i++) {
+            strcat(new_str, matrix[i]);
+        }
+    }
+    charReps(new_str);
+}
+
 int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     int counter = 0;
 
@@ -173,14 +199,14 @@ int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     }
     return counter;
 }
-void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeats[MAX_ITERATIONS][STR_LEN], int reps) {
+void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeat[MAX_ITERATIONS][STR_LEN], int reps) {
     for (int i = 0; i < reps; i++) {
         if (strlen(matrix[i]) != 5) {
             for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
                 printf("0");
             }
         }
-        printf("%s is repeated %i times\n", repeats[i], search(matrix, repeats[i], reps));
+        printf("%s is repeated %i times\n", repeat[i], search(matrix, repeat[i], reps));
     }
     printf("Number is unhappy\n");
 }
@@ -238,14 +264,21 @@ void iterationLoop(char *hex) {
         }
     }
     char key[2];
+
     printf("\n\nPress any key to show the iterations matrix:");
     printf("\n--------------------------------------------\n");
     fgets(key, 2, stdin);
     printMatrix(matrix, iteration);
+
     printf("\nPress any key to show the repetitions:");
     printf("\n--------------------------------------");
     fgets(key, 2, stdin);
     repeatedStrings(matrix, iteration);
+
+    printf("\nPress any key to show which symbols are in the iterations");
+    printf("\n---------------------------------------------------------");
+    fgets(key, 2, stdin);
+    repeatChar(matrix, iteration);
 }
 
 void run() {
