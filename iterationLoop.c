@@ -128,9 +128,13 @@ void iterationLoop(char *hex) {
 }
 
 int main() {
-    printf("%i\n", HexToDec("A9"));
+    // hex' decimal value
+    printf("%i\n", HexToDec("00A9"));
+    // the original hex value for check purposes
     printf("%s\n", DecToHex(2730));
+    // square sum value
     printf("%i\n", squaresum1(DecToHex(2730)));
+    // hex value of the square sum
     printf("%s\n", DecToHex(squaresum1(DecToHex(2730))));
     //iterationLoop("AAA");
 }
