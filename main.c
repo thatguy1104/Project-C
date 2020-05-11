@@ -14,7 +14,7 @@
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
 
-// Supplementary Functions
+// Unused functions
 
 int int_len(int value) {
     int l = !value;
@@ -23,27 +23,6 @@ int int_len(int value) {
         value /= 10;
     }
     return l;
-}
-
-void printString(char *str) {
-    while (*str != '\0')
-        printf("%c", *str++);
-    printf("\n");
-}
-
-void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
-    printf("\n");
-    for (int i = 0; i < inter_used + 1; i++) {
-        printf("%s\n", matrix[i]);
-    }
-}
-
-// Main Program Functions
-
-void questions() {
-    char continueKey[2];
-    printf("Welcome, press any key to start\n");
-    fgets(continueKey, 2, stdin);
 }
 
 bool check(char *hex) {
@@ -56,6 +35,34 @@ bool check(char *hex) {
         }
     }
     return allZeros;
+}
+
+// Supplementary Functions
+
+void printString(char *str) {
+    while (*str != '\0')
+        printf("%c", *str++);
+    printf("\n");
+}
+
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
+    printf("\n");
+    for (int i = 0; i < inter_used + 1; i++) {
+        if (strlen(matrix[i]) != 4) {
+            for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
+                printf("0");
+            }
+        }
+        printf("%s\n", matrix[i]);
+    }
+}
+
+// Main Program Functions
+
+void questions() {
+    char continueKey[2];
+    printf("Welcome, press any key to start\n");
+    fgets(continueKey, 2, stdin);
 }
 
 char *askForHexadecimal() {
@@ -212,7 +219,6 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS][STR_LEN];
     int n = 0;
 
-    printf("Repeating elements are\n");
     for (int i = 0; i < iterations; i++) {
         for (int j = i + 1; j < iterations; j++) {
             int flag = 0;
@@ -229,6 +235,11 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
                 }
             }
         }
+    }
+    if (n > 0) {
+        printf("Repeating elements are\n");
+    } else {
+        printf("No repeated elements\n");
     }
     repeats(matrix, repetitions, n);
 }
