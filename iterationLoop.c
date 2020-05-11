@@ -56,7 +56,6 @@ char *DecToHex(int decimal) {
         }
         decimal = decimal / 16;
     }
-    hexadecimal[i] = '\0';
 
     // Reverse hexadecimal array to get the final result
     for (int j = i - 1; j >= 0; j--) {
@@ -129,5 +128,9 @@ void iterationLoop(char *hex) {
 }
 
 int main() {
-    iterationLoop("31");
+    printf("%i\n", HexToDec("A9"));
+    printf("%s\n", DecToHex(2730));
+    printf("%i\n", squaresum1(DecToHex(2730)));
+    printf("%s\n", DecToHex(squaresum1(DecToHex(2730))));
+    //iterationLoop("AAA");
 }

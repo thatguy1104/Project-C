@@ -14,42 +14,57 @@
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
 
-//void repeatedStrings(char matrix[MAX][5], int numiterations) {//brings the matrix and the number of iterations
-//    char rep[ITERATIONS][100]; //new matrix for repeated strings.
-//    int i = 0, j = 0, t, repetitions, h, y, numrep = 0;
-//    for (i = 1; i <= numiterations; i++) {
-//        t = 0;
-//        for (j = 1; j <= numiterations; j++) {
-//            if (strcmp(matrix[i], rep[j]) == 0) {
-//                t = 1;
-//            }
-//        }
-//        if (t != 1) {
-//            numrep = numrep + 1;
-//            strcpy(rep[numrep], matrix[i]);
-//        }
-//    }
-//    for (i = 1; i <= numrep; i++) {
-//        t = 0;
-//        for (j = 1; j <= numiterations; j++) {
-//            if (strcmp(rep[i], matrix[j]) == 0) {
-//                t = t + 1;
-//            }
-//        }
-//        if (t > 1) {
-//            printf("\n %s is repeated %d times", rep[i], t);
-//            h = 1;
-//        }
-//    }
-//    if (h == 1) {
-//        printf("\n Unhappy number because the strings are repeated.");
-//        y = 0; //this variable used ony to then show if repetitions or not
-//    } else {
-//        printf("\nThere are no repeated strings, so no conclusions taken");
-//        y = -1; //this variable used ony to then show if repetitions or not
-//    }
-//    memset(rep, 0, sizeof rep);//this clears the matrix so it doesn't fuck up later on.
-//}
+int HexToDec(char *hex) {
+    int len = strlen(hex);
+    int base = 1;
+    int dec_val = 0;
+
+    for (int i = len - 1; i >= 0; i--) {
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            dec_val += (hex[i] - 48) * base;
+            base *= 16;
+        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            dec_val += (hex[i] - 55) * base;
+            base *= 16;
+        }
+    }
+    return dec_val;
+}
+
+char *DecToHex(int decimal) {
+    char hexadecimal[5];
+    char final[5];
+    // Dynamically allocate memory for the final string - it will be used to update it each iteration
+    char *str = malloc(5);
+    int i = 0, k = 0;
+
+    while (decimal != 0) {
+        int temp = 0;
+        temp = decimal % 16;
+        if (temp < 10) {
+            hexadecimal[i] = (char) (temp + 48);
+            i++;
+        } else {
+            hexadecimal[i] = (char) (temp + 55);
+            i++;
+        }
+        decimal = decimal / 16;
+    }
+    hexadecimal[i] = '\0';
+
+    // Reverse hexadecimal array to get the final result
+    for (int j = i - 1; j >= 0; j--) {
+        final[k] = hexadecimal[j];
+        k++;
+    }
+    final[k + 1] = '\0';
+
+    // For dynamic allocation of memory, copy contents of the final array to the heap
+    for (int i = 0; i < strlen(final); i++) {
+        str[i] = final[i];
+    }
+    return str;
+}
 
 int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     int counter = 0;
@@ -62,53 +77,37 @@ int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     return counter;
 }
 
-void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeats[MAX_ITERATIONS][STR_LEN], int reps) {
-    for (int i = 0; i < reps; i++) {
-        printf("%s is repeated %i times\n", repeats[i], search(matrix, repeats[i], reps));
+void repeats(char string[STR_LEN]) {
+    int freq[256] = {0};
+    for (int i = 0; string[i] != '\0'; i++) {
+        freq[string[i]]++;
+    }
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] != 0) {
+            printf("%c %d\n", i, freq[i]);
+        }
     }
 }
 
-void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
-    char repetitions[MAX_ITERATIONS][STR_LEN];
-    int num_of_reps[MAX_ITERATIONS];
-    int reps = 0, count;
+void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    char repetitions[MAX_ITERATIONS];
     int n = 0;
-
-    printf("Repeating elements are\n");
-    for (int i = 0; i < iterations; i++) {
-        for (int j = i + 1; j < iterations; j++) {
-            int flag = 0;
-            if (strcmp(matrix[i], matrix[j]) == 0) {
-                // check if the string was already repeated
-                for (int k = 0; k < iterations; k++) {
-                    if (strcmp(repetitions[k], matrix[i]) == 0) {
-                        flag = 1;
-                    }
-                }
-                if (flag != 1) {
-                    strcpy(repetitions[n], matrix[i]);
-                    n++;
-                }
-            }
-        }
-    }
-    repeats(matrix, repetitions, n);
+    repeats(matrix[0]);
 }
 
 int main() {
     char matrix[MAX_ITERATIONS][STR_LEN] = {
             {"001A"},
-            {"001A"},
-            {"001A"},
-            {"001B"},
-            {"001C"},
-            {"001A"},
-            {"001B"},
+            {"01"},
+            {"01A"},
+            {"1"},
+            {"01C"},
+            {"A"},
+            {"01B"},
+            {"1E"},
             {"001E"},
-            {"001E"},
-            {"001C"},
-            {"001C"},
-            {"001C"}
+            {"1C"},
+            {"C"}
     };
-    repeatedStrings(matrix, 12);
+    repeatChar(matrix, 12);
 }

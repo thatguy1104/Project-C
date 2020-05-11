@@ -13,7 +13,7 @@
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
 
-void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
+void countChar(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     printf("\n");
     for (int i = 0; i < inter_used + 1; i++) {
         if (strlen(matrix[i]) != 4) {
@@ -40,5 +40,5 @@ int main() {
             {"01C"},
             {"00C"}
     };
-    printMatrix(matrix, 12);
+    printMatrix(countChar, 12);
 }

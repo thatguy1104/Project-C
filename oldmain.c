@@ -11,7 +11,6 @@ char mat[ITERATIONS][5];
 char mat2[ITERATIONS][5];
 int decmat4[100], oke = 1, happy = 0;
 
-
 struct search {
     char hexadecimal[L];
     int count;//name less confusing bc i use count instead of iterations throughout program
@@ -340,8 +339,7 @@ void repetitions(int count) {//counts how many times a character or number is re
     }
 }//ok
 
-void showBigaSmallnumH(
-        int count) {//function to show biggest and smallest value of fmatrix--matrix printed.matrix[count][5](all of count)
+void showBigaSmallnumH(int count) {//function to show biggest and smallest value of fmatrix--matrix printed.matrix[count][5](all of count)
     char continuekey[2];
     printf("\nPress any key to show highest and lowest values\n");
     fgets(continuekey, 2, stdin);

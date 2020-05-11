@@ -48,11 +48,13 @@ void printString(char *str) {
 void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     printf("\n");
     for (int i = 0; i < inter_used; i++) {
-        if (strlen(matrix[i]) != 5) {
+        if (strlen(matrix[i]) != 4) {
             for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
                 printf("0");
             }
         }
+        char *p = matrix[i];
+        int len = strlen(matrix[i]);
         printf("%s\n", matrix[i]);
     }
 }
@@ -97,7 +99,7 @@ char *capitalise(char *hex) {
     }
 
     char *str = malloc(HEX_LEN);
-    for (int i = 0; i < strlen(result) - 1; i++) {
+    for (int i = 0; i < strlen(result); i++) {
         str[i] = result[i];
     }
     return str;
@@ -172,8 +174,6 @@ char *DecToHex(int decimal) {
         }
         decimal = decimal / 16;
     }
-    hexadecimal[i] = '\0';
-
     // Reverse hexadecimal array to get the final result
     for (int j = i - 1; j >= 0; j--) {
         final[k] = hexadecimal[j];
@@ -245,10 +245,11 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     }
     if (n > 0) {
         printf("Repeating elements are\n");
+        repeats(matrix, repetitions, n);
     } else {
-        printf("No repeated elements");
+        printf("No repeated elements. No conclusion can be taken");
     }
-    repeats(matrix, repetitions, n);
+
 }
 
 void iterationLoop(char *hex) {
@@ -299,3 +300,10 @@ void run() {
 int main() {
     run();
 }
+
+
+
+// Bugs:
+// 1) prints extra leading zero when first input = 32
+// 2) one less leading zero when first input = 32
+// 3) when printing matrix, first element is missing 1 leading zero when first input = 32
