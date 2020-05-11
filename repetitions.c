@@ -87,8 +87,6 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
                 }
                 if (flag != 1) {
                     strcpy(repetitions[n], matrix[i]);
-//                    printf("%s is %i times\n", repetitions[n], num_of_reps[n]);
-//                    printf("%s is %i times\n", repetitions[n], search(matrix, repetitions[n], iterations));
                     n++;
                 }
             }

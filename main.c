@@ -190,6 +190,50 @@ int squaresum1(char *hex) {
     return sum;
 }
 
+int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
+    int counter = 0;
+
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        if (strcmp(matrix[i], str) == 0) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeats[MAX_ITERATIONS][STR_LEN], int reps) {
+    for (int i = 0; i < reps; i++) {
+        printf("%s is repeated %i times\n", repeats[i], search(matrix, repeats[i], reps));
+    }
+}
+
+void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    char repetitions[MAX_ITERATIONS][STR_LEN];
+    int num_of_reps[MAX_ITERATIONS];
+    int reps = 0, count;
+    int n = 0;
+
+    printf("Repeating elements are\n");
+    for (int i = 0; i < iterations; i++) {
+        for (int j = i + 1; j < iterations; j++) {
+            int flag = 0;
+            if (strcmp(matrix[i], matrix[j]) == 0) {
+                // check if the string was already repeated
+                for (int k = 0; k < iterations; k++) {
+                    if (strcmp(repetitions[k], matrix[i]) == 0) {
+                        flag = 1;
+                    }
+                }
+                if (flag != 1) {
+                    strcpy(repetitions[n], matrix[i]);
+                    n++;
+                }
+            }
+        }
+    }
+    repeats(matrix, repetitions, n);
+}
+
 void iterationLoop(char *hex) {
     int iteration = 0;
     char continue_key[2];
@@ -224,6 +268,9 @@ void iterationLoop(char *hex) {
     printf("\nPress any key to show the iterations matrix:");
     fgets(key, 2, stdin);
     printMatrix(matrix, iteration);
+    printf("\nPress any key to show the repetitions:\n");
+    fgets(key, 2, stdin);
+    repeatedStrings(matrix, iteration);
 }
 
 void run() {
