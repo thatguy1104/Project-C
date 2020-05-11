@@ -51,6 +51,23 @@
 //    memset(rep, 0, sizeof rep);//this clears the matrix so it doesn't fuck up later on.
 //}
 
+int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
+    int counter = 0;
+
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        if (strcmp(matrix[i], str) == 0) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeats[MAX_ITERATIONS][STR_LEN], int reps) {
+    for (int i = 0; i < reps; i++) {
+        printf("%s is repeated %i times\n", repeats[i], search(matrix, repeats[i], reps));
+    }
+}
+
 void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS][STR_LEN];
     int num_of_reps[MAX_ITERATIONS];
@@ -62,20 +79,22 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
         for (int j = i + 1; j < iterations; j++) {
             int flag = 0;
             if (strcmp(matrix[i], matrix[j]) == 0) {
+                // check if the string was already repeated
                 for (int k = 0; k < iterations; k++) {
                     if (strcmp(repetitions[k], matrix[i]) == 0) {
                         flag = 1;
                     }
                 }
                 if (flag != 1) {
-                    printf("%s\n", matrix[i]);
                     strcpy(repetitions[n], matrix[i]);
+//                    printf("%s is %i times\n", repetitions[n], num_of_reps[n]);
+//                    printf("%s is %i times\n", repetitions[n], search(matrix, repetitions[n], iterations));
                     n++;
                 }
             }
         }
     }
-
+    repeats(matrix, repetitions, n);
 }
 
 int main() {
