@@ -129,12 +129,13 @@ void iterationLoop(char *hex) {
 
 int main() {
     // hex' decimal value
-    printf("%i\n", HexToDec("00A9"));
+    printf("%i\n", HexToDec("A9"));
     // the original hex value for check purposes
-    printf("%s\n", DecToHex(2730));
+    printf("%s\n", DecToHex(HexToDec("A9")));
+
     // square sum value
-    printf("%i\n", squaresum1(DecToHex(2730)));
+    printf("square sum = %i\n", squaresum1(DecToHex(HexToDec("A9"))));
     // hex value of the square sum
-    printf("%s\n", DecToHex(squaresum1(DecToHex(2730))));
+    printf("hex of the square sum = %s\n", DecToHex(squaresum1(DecToHex(HexToDec("A9")))));
     //iterationLoop("AAA");
 }

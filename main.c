@@ -69,8 +69,6 @@ void questions() {
 
 char *askForHexadecimal() {
     char hex[HEX_LEN];
-    char cap[HEX_LEN];
-    char noZeros[HEX_LEN];
     char *str = malloc(HEX_LEN);
 
     printf("Enter a hexadecimal number:\n");
@@ -300,7 +298,6 @@ void run() {
 int main() {
     run();
 }
-
 
 
 // Bugs:
