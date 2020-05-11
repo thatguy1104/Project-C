@@ -84,7 +84,7 @@ void repeats(char string[STR_LEN]) {
     }
     for (int i = 0; i < 256; i++) {
         if (freq[i] != 0) {
-            printf("%c %d\n", i, freq[i]);
+            printf("%d symbols %c\n", freq[i], i);
         }
     }
 }
@@ -92,7 +92,15 @@ void repeats(char string[STR_LEN]) {
 void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS];
     int n = 0;
-    repeats(matrix[0]);
+    char *new_str;
+    if ((new_str = malloc((STR_LEN * iterations) + 1)) != NULL) {
+        new_str[0] = '\0';   // ensures the memory is an empty string
+        for (int i = 0; i < iterations; i++) {
+            strcat(new_str, matrix[i]);
+        }
+    }
+
+    repeats(new_str);
 }
 
 int main() {
