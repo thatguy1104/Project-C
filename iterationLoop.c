@@ -92,15 +92,6 @@ int squaresum1(char *hex) {
         int square = digit * digit;
         sum += square;
     }
-//
-//
-//    int Dec2sum = HexToDec(hex);
-//    int remainder = 0, sum = 0;
-//    while (Dec2sum > 0) {
-//        remainder = Dec2sum % 10;
-//        sum += remainder * remainder;
-//        Dec2sum = Dec2sum / 10;
-//    }
     return sum;
 }
 

@@ -102,30 +102,41 @@ char *DecToHex(int decimal) {
         final[k] = hexadecimal[j];
         k++;
     }
-    final[k + 1] = '\0';
 
     // For dynamic allocation of memory, copy contents of the final array to the heap
     for (int i = 0; i < strlen(final); i++) {
         str[i] = final[i];
     }
+    str[i] = '\0';
     return str;
 }
+int HexToDecSUM(char hex) {
+    int base = 1, dec_val = 0;
+    if (hex >= '0' && hex <= '9') {
+        dec_val += (hex - 48) * base;
+        base = base * 16;
+    }
+    else if (hex >= 'A' && hex <= 'F') {
+        dec_val += (hex - 55) * base;
+        base = base * 16;
+    }
+    return dec_val;
+}
 int squaresum1(char *hex) {
-    int Dec2sum = HexToDec(hex);
-    int remainder = 0, sum = 0;
-    while (Dec2sum > 0) {
-        remainder = Dec2sum % 10;
-        sum += remainder * remainder;
-        Dec2sum = Dec2sum / 10;
+    int sum = 0;
+
+    for (int i = 0; i < strlen(hex); i++) {
+        int digit = HexToDecSUM(hex[i]);
+        int square = digit * digit;
+        sum += square;
     }
     return sum;
 }
-
 void iterationLoop(char *hex) {
     int iteration = 0;
     char continue_key[2];
     int sum_of_squares = squaresum1(hex);
-    printf("Starting...\n");
+    printf("Starting...");
     fgets(continue_key, 1, stdin);
 
     char matrix[MAX_ITERATIONS][STR_LEN];
@@ -134,30 +145,26 @@ void iterationLoop(char *hex) {
         if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
             fgets(continue_key, 2, stdin);
             strcpy(matrix[iteration], hex);
-            printString(hex);
-            printf("decimal = %i\n", HexToDec(hex));
-            printf("sum of squares = %i\n", squaresum1(hex));
             sum_of_squares = squaresum1(hex);
             hex = DecToHex(sum_of_squares);
-
-            printString(hex);
+            printf("Iteration %i: %s", iteration + 1, hex);
             iteration++;
         } else if (continue_key[0] == ' ') {
             break;
         } else if (sum_of_squares == 1) {
-            strcpy(matrix[iteration], "1");
+            strcpy(matrix[iteration], "0001");
             break;
         } else {
             break;
         }
     }
-//    char key[2];
-//    printf("\nPress any key to show the iterations matrix:");
-//    fgets(key, 2, stdin);
-//    printMatrix(matrix, iteration);
-//    printf("\nPress any key to show the repetitions:\n");
-//    fgets(key, 2, stdin);
-//    repeatedStrings(matrix, iteration);
+    char key[2];
+    printf("\nPress any key to show the iterations matrix:");
+    fgets(key, 2, stdin);
+    printMatrix(matrix, iteration);
+    printf("\nPress any key to show the repetitions:\n");
+    fgets(key, 2, stdin);
+    repeatedStrings(matrix, iteration);
 }
 
 char *askForHexadecimal() {
@@ -179,7 +186,7 @@ char *askForHexadecimal() {
 
     char *f = removeZeros(str);
     char *c = capitalise(f);
-    printString(c);
+    printf("String is: %s\n", c);
     return c;
 }
 
