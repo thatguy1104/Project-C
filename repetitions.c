@@ -14,12 +14,30 @@
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
 
-void charReps(char string[STR_LEN]) {
+int leadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    int zeros = 0;
+    bool leading = true;
+
+    for (int i = 0; i < iterations; i++) {
+        leading = true;
+        for (int j = 0; j < strlen(matrix[i]); j++) {
+            if (matrix[i][j] != '0') {
+                leading = false;
+            }
+            if (matrix[i][j] == '0' && leading) {
+                zeros++;
+            }
+        }
+    }
+    return zeros;
+}
+
+void charReps(char string[STR_LEN], int leading_zeros) {
     int freq[256] = {0};
     for (int i = 0; string[i] != '\0'; i++) {
         freq[string[i]]++;
     }
-    printf("%lu symbols, %i leading on the left", strlen(string), 0);
+    printf("%lu symbols, %i leading on the left\n", strlen(string), leading_zeros);
     for (int i = 0; i < 256; i++) {
         if (freq[i] != 0) {
             printf("%d symbols %c\n", freq[i], i);
@@ -31,13 +49,15 @@ void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS];
     int n = 0;
     char *new_str;
+    // Dynamically allocate memory of size STR_LEN * iterations + 1
     if ((new_str = malloc((STR_LEN * iterations) + 1)) != NULL) {
-        new_str[0] = '\0';   // ensures the memory is an empty string
+        new_str[0] = '\0';
         for (int i = 0; i < iterations; i++) {
             strcat(new_str, matrix[i]);
         }
     }
-    charReps(new_str);
+    int lead = leadingZeros(matrix, iterations);
+    charReps(new_str, lead);
 }
 
 int main() {
@@ -47,7 +67,7 @@ int main() {
             {"01A"},
             {"1"},
             {"01C"},
-            {"A"},
+            {"A0"},
             {"01B"},
             {"1E"},
             {"001E"},
