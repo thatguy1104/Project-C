@@ -48,12 +48,12 @@ void printString(char *str) {
 void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     printf("\n");
     for (int i = 0; i < inter_used + 1; i++) {
-        if (strlen(matrix[i]) != 4) {
+        if (strlen(matrix[i]) != 5) {
             for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
                 printf("0");
             }
         }
-        printf("%s\n", matrix[i]);
+        printf("%s length = %i \n", matrix[i], strlen(matrix[i]));
     }
 }
 
@@ -84,6 +84,8 @@ char *askForHexadecimal() {
 
     char *f = removeZeros(str);
     char *c = capitalise(f);
+
+    int len = strlen(c);
     printString(c);
     return c;
 }
@@ -95,7 +97,7 @@ char *capitalise(char *hex) {
     }
 
     char *str = malloc(HEX_LEN);
-    for (int i = 0; i < strlen(result); i++) {
+    for (int i = 0; i < strlen(result) - 1; i++) {
         str[i] = result[i];
     }
     return str;
@@ -239,7 +241,7 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     if (n > 0) {
         printf("Repeating elements are\n");
     } else {
-        printf("No repeated elements\n");
+        printf("No repeated elements");
     }
     repeats(matrix, repetitions, n);
 }
