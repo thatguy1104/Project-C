@@ -54,37 +54,44 @@
 void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS][STR_LEN];
     int num_of_reps[MAX_ITERATIONS];
-    int reps = 0;
+    int reps = 0, count;
     int n = 0;
 
     printf("Repeating elements are\n");
     for (int i = 0; i < iterations; i++) {
-        for (int j = i + 1; j < STR_LEN; j++) {
+        for (int j = i + 1; j < iterations; j++) {
+            int flag = 0;
             if (strcmp(matrix[i], matrix[j]) == 0) {
-//                for (int k = 0; k < iterations; k++) {
-//                    for (int m = k + 1; m < STR_LEN; m++) {
-//                        if (strcmp(repetitions[k], matrix[m]) == 0) {
-//                            num_of_reps[n] += 1;
-//                        }
-//                    }
-//                }
-
-                printf("%s repeated %i times\n", matrix[i], num_of_reps[n]);
-                strcpy(repetitions[n], matrix[i]);
-                n++;
+                for (int k = 0; k < iterations; k++) {
+                    if (strcmp(repetitions[k], matrix[i]) == 0) {
+                        flag = 1;
+                    }
+                }
+                if (flag != 1) {
+                    printf("%s\n", matrix[i]);
+                    strcpy(repetitions[n], matrix[i]);
+                    n++;
+                }
             }
         }
     }
+
 }
 
 int main() {
     char matrix[MAX_ITERATIONS][STR_LEN] = {
             {"001A"},
+            {"001A"},
+            {"001A"},
             {"001B"},
             {"001C"},
             {"001A"},
             {"001B"},
-            {"001B"}
+            {"001E"},
+            {"001E"},
+            {"001C"},
+            {"001C"},
+            {"001C"}
     };
-    repeatedStrings(matrix, 5);
+    repeatedStrings(matrix, 12);
 }
