@@ -19,6 +19,16 @@ void printString(char *str) {
         printf("%c", *str++);
     printf("\n");
 }
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
+    for (int i = 0; i < inter_used; i++) {
+        if (strlen(matrix[i]) != 4) {
+            for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
+                printf("0");
+            }
+        }
+        printf("%s\n", matrix[i]);
+    }
+}
 char *capitalise(char *hex) {
     char result[HEX_LEN];
     for (int i = 0; i < strlen(hex); i++) {
@@ -132,41 +142,6 @@ int squaresum1(char *hex) {
     }
     return sum;
 }
-void iterationLoop(char *hex) {
-    int iteration = 0;
-    char continue_key[2];
-    int sum_of_squares = squaresum1(hex);
-    printf("Starting...");
-    fgets(continue_key, 1, stdin);
-
-    char matrix[MAX_ITERATIONS][STR_LEN];
-
-    while (true) {
-        if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
-            fgets(continue_key, 2, stdin);
-            strcpy(matrix[iteration], hex);
-            sum_of_squares = squaresum1(hex);
-            hex = DecToHex(sum_of_squares);
-            printf("Iteration %i: %s", iteration + 1, hex);
-            iteration++;
-        } else if (continue_key[0] == ' ') {
-            break;
-        } else if (sum_of_squares == 1) {
-            strcpy(matrix[iteration], "0001");
-            break;
-        } else {
-            break;
-        }
-    }
-    char key[2];
-    printf("\nPress any key to show the iterations matrix:");
-    fgets(key, 2, stdin);
-    printMatrix(matrix, iteration);
-    printf("\nPress any key to show the repetitions:\n");
-    fgets(key, 2, stdin);
-    repeatedStrings(matrix, iteration);
-}
-
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     char *str = malloc(HEX_LEN);
@@ -188,6 +163,40 @@ char *askForHexadecimal() {
     char *c = capitalise(f);
     printf("String is: %s\n", c);
     return c;
+}
+void iterationLoop(char *hex) {
+    int iteration = 0;
+    char continue_key[2];
+    int sum_of_squares = squaresum1(hex);
+    printf("Starting...");
+    fgets(continue_key, 1, stdin);
+
+    char matrix[MAX_ITERATIONS][STR_LEN];
+
+    while (true) {
+        if (iteration != MAX_ITERATIONS && sum_of_squares != 1) {
+            fgets(continue_key, 2, stdin);
+            sum_of_squares = squaresum1(hex);
+            hex = DecToHex(sum_of_squares);
+            strcpy(matrix[iteration], hex);
+            printf("Iteration %i: %s", iteration + 1, hex);
+            iteration++;
+        } else if (continue_key[0] == ' ') {
+            break;
+        } else if (sum_of_squares == 1) {
+            strcpy(matrix[iteration], "0001");
+            break;
+        } else {
+            break;
+        }
+    }
+    char key[2];
+    printf("\n\nPress any key to show the iterations matrix:");
+    fgets(key, 2, stdin);
+    printMatrix(matrix, iteration);
+//    printf("\nPress any key to show the repetitions:\n");
+//    fgets(key, 2, stdin);
+//    repeatedStrings(matrix, iteration);
 }
 
 void run() {
