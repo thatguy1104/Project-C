@@ -31,7 +31,6 @@ int leadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     }
     return zeros;
 }
-
 void charReps(char string[STR_LEN], int leading_zeros) {
     int freq[256] = {0};
     for (int i = 0; string[i] != '\0'; i++) {
@@ -44,7 +43,6 @@ void charReps(char string[STR_LEN], int leading_zeros) {
         }
     }
 }
-
 void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS];
     int n = 0;
