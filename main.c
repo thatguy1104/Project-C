@@ -194,8 +194,6 @@ void charReps(char string[STR_LEN], int leading_zeros) {
     }
 }
 void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
-    char repetitions[MAX_ITERATIONS];
-    int n = 0;
     char *new_str;
     // Dynamically allocate memory of size STR_LEN * iterations + 1
     if ((new_str = malloc((STR_LEN * iterations) + 1)) != NULL) {
@@ -272,7 +270,16 @@ void iterationLoop(char *hex) {
             sum_of_squares = squaresum1(hex);
             hex = DecToHex(sum_of_squares);
             strcpy(matrix[iteration], hex);
-            printf("Iteration %i: %s", iteration + 1, hex);
+
+
+
+            printf("Iteration %i: ", iteration + 1);
+            if (strlen(hex) != 4) {
+                for (int j = 0; j < 4 - strlen(hex); j++) {
+                    printf("0");
+                }
+            }
+            printf("%s", hex);
             iteration++;
         }
         else if (sum_of_squares == 1) {
@@ -295,7 +302,7 @@ void iterationLoop(char *hex) {
     repeatedStrings(matrix, iteration);
 
     printf("\nPress any key to show which symbols are in the iterations");
-    printf("\n---------------------------------------------------------");
+    printf("\n---------------------------------------------------------\n");
     fgets(key, 2, stdin);
     repeatChar(matrix, iteration);
 }

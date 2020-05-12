@@ -57,6 +57,40 @@ void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     int lead = leadingZeros(matrix, iterations);
     charReps(new_str, lead);
 }
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
+    for (int i = 0; i < inter_used; i++) {
+        if (strlen(matrix[i]) != 4) {
+            for (int j = 0; j < 4 - strlen(matrix[i]); j++) {
+                printf("0");
+            }
+        }
+        printf("%s\n", matrix[i]);
+    }
+}
+
+void addZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    int zeros = 0;
+    bool leading = true;
+
+    for (int i = 0; i < iterations; i++) {
+        leading = true;
+
+        for (int j = 0; j < strlen(matrix[i]); j++) {
+            if (matrix[i][j] != '0') {
+                leading = false;
+            }
+            if (matrix[i][j] == '0' && leading) {
+                zeros++;
+            }
+        }
+    }
+
+    for (int i = 0; i < iterations; i++) {
+        for (int j = 0; j < STR_LEN; j++) {
+            p[i][j] = new[i][j];
+        }
+    }
+}
 
 int main() {
     char matrix[MAX_ITERATIONS][STR_LEN] = {
@@ -72,5 +106,5 @@ int main() {
             {"1C"},
             {"C"}
     };
-    repeatChar(matrix, 12);
+    printMatrix(addZeros(matrix, 12), 12);
 }
