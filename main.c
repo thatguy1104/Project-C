@@ -14,11 +14,13 @@ void questions() {
     printf("Welcome, press any key to start\n");
     fgets(continueKey, 2, stdin);
 }
+
 void printString(char *str) {
     while (*str != '\0')
         printf("%c", *str++);
     printf("\n");
 }
+
 void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     for (int i = 0; i < inter_used; i++) {
         if (strlen(matrix[i]) != 4) {
@@ -29,6 +31,7 @@ void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
         printf("%s\n", matrix[i]);
     }
 }
+
 char *capitalise(char *hex) {
     char result[HEX_LEN];
     for (int i = 0; i < strlen(hex); i++) {
@@ -41,6 +44,7 @@ char *capitalise(char *hex) {
     }
     return str;
 }
+
 char *removeZeros(char *str) {
     char nonZ[HEX_LEN];
     int k = 0;
@@ -62,6 +66,7 @@ char *removeZeros(char *str) {
     }
     return p;
 }
+
 bool allZeros(char *str) {
     bool zeros = false;
     while (*str != '\n') {
@@ -72,6 +77,7 @@ bool allZeros(char *str) {
     }
     return true;
 }
+
 int HexToDec(char *hex) {
     int len = strlen(hex);
     int base = 1;
@@ -88,6 +94,7 @@ int HexToDec(char *hex) {
     }
     return dec_val;
 }
+
 char *DecToHex(int decimal) {
     char hexadecimal[5];
     char final[5];
@@ -120,6 +127,7 @@ char *DecToHex(int decimal) {
     str[i] = '\0';
     return str;
 }
+
 int HexToDecSUM(char hex) {
     int base = 1, dec_val = 0;
     if (hex >= '0' && hex <= '9') {
@@ -131,6 +139,7 @@ int HexToDecSUM(char hex) {
     }
     return dec_val;
 }
+
 int squaresum1(char *hex) {
     int sum = 0;
 
@@ -141,6 +150,7 @@ int squaresum1(char *hex) {
     }
     return sum;
 }
+
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     char *str = malloc(HEX_LEN);
@@ -209,6 +219,7 @@ int countLeadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     }
     return zeros;
 }
+
 void charReps(char string[STR_LEN], int leading_zeros) {
     int freq[256] = {0};
     for (int i = 0; string[i] != '\0'; i++) {
@@ -219,7 +230,7 @@ void charReps(char string[STR_LEN], int leading_zeros) {
         if (string[i] == '0') count++;
     }
 
-    printf("%lu symbols 0, %i leading on the left\n", leading_zeros + count, leading_zeros);
+    printf("%d symbols 0, %i leading on the left\n", leading_zeros + count, leading_zeros);
     for (int i = 0; i < 256; i++) {
         if (freq[i] != 0) {
             if (i != '0')
@@ -227,6 +238,7 @@ void charReps(char string[STR_LEN], int leading_zeros) {
         }
     }
 }
+
 void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS];
     int n = 0;
@@ -252,6 +264,7 @@ int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     }
     return counter;
 }
+
 void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeat[MAX_ITERATIONS][STR_LEN], int reps) {
     for (int i = 0; i < reps; i++) {
         if (strlen(matrix[i]) != 5) {
@@ -263,6 +276,7 @@ void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeat[MAX_ITERATIONS][S
     }
     printf("Number is unhappy\n");
 }
+
 void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     char repetitions[MAX_ITERATIONS][STR_LEN];
     int n = 0;
@@ -292,6 +306,7 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     }
 
 }
+
 void iterationLoop(char *hex) {
     int iteration = 0;
     char continue_key[2];
@@ -308,7 +323,6 @@ void iterationLoop(char *hex) {
             strcpy(matrix[iteration], hex);
 
 
-
             printf("Iteration %i: ", iteration + 1);
             if (strlen(hex) != 4) {
                 for (int j = 0; j < 4 - strlen(hex); j++) {
@@ -317,8 +331,7 @@ void iterationLoop(char *hex) {
             }
             printf("%s", hex);
             iteration++;
-        }
-        else if (sum_of_squares == 1) {
+        } else if (sum_of_squares == 1) {
             strcpy(matrix[iteration], "0001");
             break;
         } else {

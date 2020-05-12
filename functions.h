@@ -9,38 +9,46 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-#define MAXCHAR 20
-#define ITERATIONS 100
+#define HEX_LEN 20
+#define MAX_ITERATIONS 100
+#define STR_LEN 5
 
 void questions();
 
-void printString(char* str);
+void printString(char *str);
 
-bool check(char *hex);
+void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used);
 
 char *capitalise(char *hex);
 
-bool allZeros(char *str);
-
-void asknumHex(char numHex[MAXCHAR]);
-
 char *removeZeros(char *str);
 
-int conversionHex2Dec(char numHex[MAXCHAR]);
+bool allZeros(char *str);
 
-int happyNumber(char nozerosHex[MAXCHAR],char matrix[ITERATIONS][5]);
+int HexToDec(char *hex);
 
-int conversionDec2Hex(int sol, int count, char matrix2[5]);
+char *DecToHex(int decimal);
 
-void fmatrix(char matrix[ITERATIONS][5], int count);
+int HexToDecSUM(char hex);
 
-void count_frequency(int*data,int size);
+int squaresum1(char *hex);
 
-void numreps(int count,char matfinal[ITERATIONS][5]);
+char *askForHexadecimal();
 
-void repetitions(int count);
+void minMax(char matrix[MAX_ITERATIONS][STR_LEN], int iterations);
 
-void showBigaSmallnumH(int count);
+int countLeadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations);
 
-int End_program();
+void charReps(char string[STR_LEN], int leading_zeros);
 
+void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations);
+
+int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps);
+
+void repeats(char matrix[MAX_ITERATIONS][STR_LEN], char repeat[MAX_ITERATIONS][STR_LEN], int reps);
+
+void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations);
+
+void iterationLoop(char *hex);
+
+void run();
