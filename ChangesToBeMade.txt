@@ -1,0 +1,40 @@
+By: Albert M. E.
+Date: 12.05.2020
+
+------------
+| CHANGE 1 |
+------------
+
+Need to add:
+#include <conio.h>
+
+Need to change:
+fgets(continueKey, 2, stdin);
+
+To:
+continueKey = getch();
+
+Where:
+Everywhere where the program asks to either press "any key" or "space bar".
+
+
+NOTE:
+If possible to go with fgets() instead of gets() --> for example when just pressing ENTER, its better to go with that, it is safer and more robust to use.
+
+------------
+| CHANGE 2 |
+------------
+
+Need to change:
+for (int i = 0; ...){}
+
+To:
+int i;
+for (i = 0; ...){}
+
+Where:
+Inside every for / while loop in the program.
+
+NOTE:
+When working on this change, try to test the code constantly. It is important, as in many parts it uses "i" variable more than once, declaring it again. So if you see it being used again, just be careful to reset it's value back to what you need it to be, otherwise, it may break the code, and you will see weird symbols printed.
+
