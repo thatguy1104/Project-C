@@ -305,6 +305,11 @@ void iterationLoop(char *hex) {
     printf("\n---------------------------------------------------------\n");
     fgets(key, 2, stdin);
     repeatChar(matrix, iteration);
+
+//    printf("\nPress any key to show lowest and biggest numbers");
+//    printf("\n---------------------------------------------------------\n");
+//    fgets(key, 2, stdin);
+//
 }
 
 void run() {
