@@ -15,12 +15,6 @@ void questions() {
     fgets(continueKey, 2, stdin);
 }
 
-void printString(char *str) {
-    while (*str != '\0')
-        printf("%c", *str++);
-    printf("\n");
-}
-
 void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     for (int i = 0; i < inter_used; i++) {
         if (strlen(matrix[i]) != 4) {
@@ -37,7 +31,6 @@ char *capitalise(char *hex) {
     for (int i = 0; i < strlen(hex); i++) {
         result[i] = toupper(hex[i]);
     }
-
     char *str = malloc(HEX_LEN);
     for (int i = 0; i < strlen(result); i++) {
         str[i] = result[i];
@@ -142,7 +135,6 @@ int HexToDecSUM(char hex) {
 
 int squaresum1(char *hex) {
     int sum = 0;
-
     for (int i = 0; i < strlen(hex); i++) {
         int digit = HexToDecSUM(hex[i]);
         int square = digit * digit;
@@ -180,14 +172,12 @@ void minMax(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     for (int i = 0; i < iterations; i++) {
         arrInt[i] = HexToDec(matrix[i]);
     }
-
     // Find the min and max values of the integer array
     int min = arrInt[0], max = arrInt[0];
     for (int i = 0; i < iterations; i++) {
         if (arrInt[i] < min) min = arrInt[i];
         if (arrInt[i] > max) max = arrInt[i];
     }
-
     // Print min and max values in their hexadecimal representation (with the leading zeros)
     char *mi = DecToHex(min);
     char *mx = DecToHex(max);
@@ -211,7 +201,6 @@ void minMax(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
 int countLeadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     int zeros = 0;
     bool leading = true;
-
     for (int i = 0; i < iterations; i++) {
         if (strlen(matrix[i]) != 4) {
             zeros += 4 - strlen(matrix[i]);
@@ -222,14 +211,13 @@ int countLeadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
 
 void charReps(char string[STR_LEN], int leading_zeros) {
     int freq[256] = {0};
+    int count = 0;
     for (int i = 0; string[i] != '\0'; i++) {
         freq[string[i]]++;
     }
-    int count = 0;
     for (int i = 0; i < strlen(string); i++) {
         if (string[i] == '0') count++;
     }
-
     printf("%d symbols 0, %i leading on the left\n", leading_zeros + count, leading_zeros);
     for (int i = 0; i < 256; i++) {
         if (freq[i] != 0) {
@@ -240,8 +228,6 @@ void charReps(char string[STR_LEN], int leading_zeros) {
 }
 
 void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
-    char repetitions[MAX_ITERATIONS];
-    int n = 0;
     char *new_str;
     // Dynamically allocate memory of size STR_LEN * iterations + 1
     if ((new_str = malloc((STR_LEN * iterations) + 1)) != NULL) {
@@ -256,7 +242,6 @@ void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
 
 int search(char matrix[MAX_ITERATIONS][STR_LEN], char str[STR_LEN], int reps) {
     int counter = 0;
-
     for (int i = 0; i < MAX_ITERATIONS; i++) {
         if (strcmp(matrix[i], str) == 0) {
             counter++;
@@ -304,7 +289,6 @@ void repeatedStrings(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     } else {
         printf("No repeated elements. No conclusion can be taken");
     }
-
 }
 
 void iterationLoop(char *hex) {
@@ -312,7 +296,6 @@ void iterationLoop(char *hex) {
     char continue_key[2];
     int sum_of_squares = squaresum1(hex);
     fgets(continue_key, 1, stdin);
-
     char matrix[MAX_ITERATIONS][STR_LEN];
 
     while (true) {
