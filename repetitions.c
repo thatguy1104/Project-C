@@ -14,19 +14,13 @@
 #define MAX_ITERATIONS 100
 #define STR_LEN 5
 
-int leadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+int countLeadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     int zeros = 0;
     bool leading = true;
 
     for (int i = 0; i < iterations; i++) {
-        leading = true;
-        for (int j = 0; j < strlen(matrix[i]); j++) {
-            if (matrix[i][j] != '0') {
-                leading = false;
-            }
-            if (matrix[i][j] == '0' && leading) {
-                zeros++;
-            }
+        if (strlen(matrix[i]) != 4) {
+            zeros += 4 - strlen(matrix[i]);
         }
     }
     return zeros;
@@ -54,9 +48,10 @@ void repeatChar(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
             strcat(new_str, matrix[i]);
         }
     }
-    int lead = leadingZeros(matrix, iterations);
+    int lead = countLeadingZeros(matrix, iterations);
     charReps(new_str, lead);
 }
+
 void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     for (int i = 0; i < inter_used; i++) {
         if (strlen(matrix[i]) != 4) {
@@ -68,43 +63,44 @@ void printMatrix(char matrix[MAX_ITERATIONS][STR_LEN], int inter_used) {
     }
 }
 
-void addZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
-    int zeros = 0;
-    bool leading = true;
-
-    for (int i = 0; i < iterations; i++) {
-        leading = true;
-
-        for (int j = 0; j < strlen(matrix[i]); j++) {
-            if (matrix[i][j] != '0') {
-                leading = false;
-            }
-            if (matrix[i][j] == '0' && leading) {
-                zeros++;
-            }
-        }
-    }
-
-    for (int i = 0; i < iterations; i++) {
-        for (int j = 0; j < STR_LEN; j++) {
-            p[i][j] = new[i][j];
-        }
-    }
-}
+//void addZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+//    int zeros = 0;
+//    bool leading = true;
+//
+//    for (int i = 0; i < iterations; i++) {
+//        leading = true;
+//
+//        for (int j = 0; j < strlen(matrix[i]); j++) {
+//            if (matrix[i][j] != '0') {
+//                leading = false;
+//            }
+//            if (matrix[i][j] == '0' && leading) {
+//                zeros++;
+//            }
+//        }
+//    }
+//
+//    for (int i = 0; i < iterations; i++) {
+//        for (int j = 0; j < STR_LEN; j++) {
+//            p[i][j] = new[i][j];
+//        }
+//    }
+//}
 
 int main() {
     char matrix[MAX_ITERATIONS][STR_LEN] = {
-            {"001A"},
-            {"01"},
-            {"01A"},
-            {"1"},
-            {"01C"},
-            {"A0"},
-            {"01B"},
-            {"1E"},
-            {"001E"},
-            {"1C"},
-            {"C"}
+            {"172"},
+            {"0036"},
+            {"2D"},
+            {"AD"},
+            {"10D"},
+            {"AA"},
+            {"C8"},
+            {"D0"},
+            {"A9"},
+            {"B5"}
     };
-    printMatrix(addZeros(matrix, 12), 12);
+    printf("%i\n", countLeadingZeros(matrix, 10));
 }
+
+// from input 0000ab12c
