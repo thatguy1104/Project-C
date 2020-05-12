@@ -76,8 +76,25 @@ void minMax(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
         if (arrInt[i] < min) min = arrInt[i];
         if (arrInt[i] > max) max = arrInt[i];
     }
-    // Print min and max values in their hexadecimal representation
-    printf("Lowest number is %s\nBiggest number is %s\n", DecToHex(min),  DecToHex(max));
+
+    // Print min and max values in their hexadecimal representation (with the leading zeros)
+    char *mi = DecToHex(min);
+    char *mx = DecToHex(max);
+    printf("Lowest number is ");
+    if (strlen(mi) != 4) {
+        for (int j = 0; j < 4 - strlen(mi); j++) {
+            printf("0");
+        }
+    }
+    printf("%s\n", mi);
+
+    printf("Biggest number is ");
+    if (strlen(mx) != 4) {
+        for (int j = 0; j < 4 - strlen(mx); j++) {
+            printf("0");
+        }
+    }
+    printf("%s\n", mx);
 }
 
 

@@ -164,6 +164,40 @@ char *askForHexadecimal() {
     return c;
 }
 
+void minMax(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
+    int arrInt[MAX_ITERATIONS];
+    // fill the integer matrix with values of the hexadecimal matrix
+    for (int i = 0; i < iterations; i++) {
+        arrInt[i] = HexToDec(matrix[i]);
+    }
+
+    // Find the min and max values of the integer array
+    int min = arrInt[0], max = arrInt[0];
+    for (int i = 0; i < iterations; i++) {
+        if (arrInt[i] < min) min = arrInt[i];
+        if (arrInt[i] > max) max = arrInt[i];
+    }
+
+    // Print min and max values in their hexadecimal representation (with the leading zeros)
+    char *mi = DecToHex(min);
+    char *mx = DecToHex(max);
+    printf("Lowest number is ");
+    if (strlen(mi) != 4) {
+        for (int j = 0; j < 4 - strlen(mi); j++) {
+            printf("0");
+        }
+    }
+    printf("%s\n", mi);
+
+    printf("Biggest number is ");
+    if (strlen(mx) != 4) {
+        for (int j = 0; j < 4 - strlen(mx); j++) {
+            printf("0");
+        }
+    }
+    printf("%s\n", mx);
+}
+
 int leadingZeros(char matrix[MAX_ITERATIONS][STR_LEN], int iterations) {
     int zeros = 0;
     bool leading = true;
@@ -306,10 +340,10 @@ void iterationLoop(char *hex) {
     fgets(key, 2, stdin);
     repeatChar(matrix, iteration);
 
-//    printf("\nPress any key to show lowest and biggest numbers");
-//    printf("\n---------------------------------------------------------\n");
-//    fgets(key, 2, stdin);
-//
+    printf("\nPress any key to show lowest and biggest numbers");
+    printf("\n------------------------------------------------\n");
+    fgets(key, 2, stdin);
+    minMax(matrix, iteration);
 }
 
 void run() {
