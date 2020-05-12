@@ -216,13 +216,14 @@ void charReps(char string[STR_LEN], int leading_zeros) {
     }
     int count = 0;
     for (int i = 0; i < strlen(string); i++) {
-        if (string[i] != '0') count++;
+        if (string[i] == '0') count++;
     }
 
-    printf("%lu symbols, %i leading on the left\n", count, leading_zeros);
+    printf("%lu symbols 0, %i leading on the left\n", leading_zeros + count, leading_zeros);
     for (int i = 0; i < 256; i++) {
         if (freq[i] != 0) {
-            printf("%d symbols %c\n", freq[i], i);
+            if (i != '0')
+                printf("%d symbols %c\n", freq[i], i);
         }
     }
 }
