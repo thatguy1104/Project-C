@@ -152,7 +152,6 @@ int squaresum1(char *hex) {
     return sum;
 }
 
-
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     char *str = malloc(HEX_LEN);
