@@ -71,6 +71,15 @@ bool allZeros(char *str) {
     return true;
 }
 
+bool isHex(char num[HEX_LEN]) {
+    for (int i = 0; i < strlen(num) - 1; i++) {
+        if (!isxdigit(num[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int HexToDec(char *hex) {
     int len = strlen(hex);
     int base = 1;
@@ -143,6 +152,7 @@ int squaresum1(char *hex) {
     return sum;
 }
 
+
 char *askForHexadecimal() {
     char hex[HEX_LEN];
     char *str = malloc(HEX_LEN);
@@ -151,7 +161,7 @@ char *askForHexadecimal() {
     printf("Enter a hexadecimal number:\n");
     fgets(hex, HEX_LEN, stdin);
 
-    while (allZeros(hex)) {
+    while (allZeros(hex) || !isHex(hex)) {
         printf("Enter a hexadecimal number:\n");
         fgets(hex, HEX_LEN, stdin);
     }
